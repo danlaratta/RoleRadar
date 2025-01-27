@@ -14,27 +14,24 @@ class ResumeParser:
         text = '\n'.join(block[4].strip() for block in blocks if block[4].strip())
         return text
 
+
     def get_resume_data(self):
         # Get resume text
         text = self.parse_resume()
 
-        # Define job title and company keywords
+        # Define job title, company keywords, and regex for date ranges
         job_keywords = ['software engineer', 'software developer']
         company_keywords = ['Future Skies, Inc.', 'South Fulton Recording Studio', 'Cognixia']
-
-        # Define regex for date ranges
         date_pattern = r'\b([A-Za-z]{3,}\.\s\d{4})\s*–\s*([A-Za-z]{3,}\.\s\d{4})\b'
 
         # Split the full text into lines
         lines = text.split('\n')
 
-        # Extract lines containing job keywords
+        # Extract job titles and company names
         job_matches = [
             line for line in lines
             if any(keyword.lower() in line.lower() for keyword in job_keywords)
         ]
-
-        # Extract lines containing company keywords
         company_matches = [
             line for line in lines
             if any(company.lower() in line.lower() for company in company_keywords)
@@ -51,8 +48,6 @@ class ResumeParser:
         company_matches += [None] * (max_length - len(company_matches))
         start_dates += [None] * (max_length - len(start_dates))
         end_dates += [None] * (max_length - len(end_dates))
-
-        # Combine the extracted data into a structured format
         data = {
             'Job Titles': job_matches,
             'Companies': company_matches,
