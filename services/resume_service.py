@@ -1,5 +1,5 @@
 from services import ResumeParser
-from dateutil.relativedelta import relativedelta
+from models import ExperienceLevel
 import re
 import pandas as pd
 
@@ -80,4 +80,19 @@ class ResumeService:
 
     # Return the experience level based on my years of experience
     def get_experience_level(self):
-        pass
+        years = self.get_years_of_experience()
+        experience_level = None
+
+        # Set experience level based on number of years
+        if years == 0:
+            experience_level = ExperienceLevel.INTERNSHIP
+        elif 0 < years <= 2:
+            experience_level = ExperienceLevel.ENTRY
+        elif 2 < years <= 3:
+            experience_level = ExperienceLevel.ASSOCIATE
+        elif 3 < years <= 10:
+            experience_level = ExperienceLevel.MID_SENIOR
+        elif years > 10:
+            experience_level = ExperienceLevel.DIRECTOR
+
+        return experience_level

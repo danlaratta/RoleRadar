@@ -8,8 +8,9 @@ class Main:
         # print(service.create_job_dataframe().to_string())
 
         r = ResumeService()
-        print(r.get_resume_data().to_string())
+        # print(r.get_resume_data().to_string())
         # print(r.get_years_of_experience())
+        print(r.get_experience_level())
 
 if __name__ == '__main__':
     print('Project is starting to run.')
