@@ -1,6 +1,8 @@
 from enum import Enum
 
 class ExperienceLevel(Enum):
-    INTERN = 1
+    INTERNSHIP = 1
     ENTRY = 2
-    MID_SENIOR = 3
+    ASSOCIATE = 3
+    MID_SENIOR = 4
+    DIRECTOR = 5
